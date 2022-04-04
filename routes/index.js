@@ -16,17 +16,17 @@ router.get('/register', function (req, res, next) {
 });
 
 router.post("/register", function (req, res, next) {
-	req.assert("nama", "Please fill the name").notEmpty();
+	req.assert("name", "Please fill the name").notEmpty();
 	req.assert("email", "Please fill the email").notEmpty();
 	req.assert("password", "Please fill the password").notEmpty();
 	var errors = req.validationErrors();
 	if (!errors) {
-		v_nama = req.sanitize("nama").escape().trim();
+		v_name = req.sanitize("name").escape().trim();
 		v_email = req.sanitize("email").escape().trim();
 		v_password = req.sanitize("password").escape();
 
 		var user = {
-			nama: v_nama,
+			name: v_name,
 			email: v_email,
 			password: v_password,
 		};
@@ -41,7 +41,7 @@ router.post("/register", function (req, res, next) {
 						var errors_detail = ("Error Insert : %s ", err);
 						req.flash("msg_error", errors_detail);
 						res.render("main/register", {
-							nama: req.param("nama"),
+							name: req.param("name"),
 							address: req.param("address"),
 							email: req.param("email"),
 							password: req.param("password"),
